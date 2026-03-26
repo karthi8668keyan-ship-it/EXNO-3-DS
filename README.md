@@ -31,8 +31,46 @@ We use this categorical data encoding technique when the features are nominal(do
 • Yeojohnson method
 
 # CODING AND OUTPUT:
-       # INCLUDE YOUR CODING AND OUTPUT SCREENSHOTS HERE
+Import Required Libraries and Reading the Dataset:
+```
+import numpy as np
+import pandas as pd
+from scipy.stats import boxcox
+from sklearn.preprocessing import LabelEncoder,StandardScaler,PowerTransformer
+df=pd.read_csv("Data_to_Transform.csv")
+print("The Dataset is readed successfully")
+print("The Original Dataset:")
+print(df.head())
+print("The Original Dataset:")
+print(df.head())
+numeric_column=df.select_dtypes(include=np.number).columns[0]
+positive_data=df[df[numeric_column]>0].copy()
+```
+Log Transformation
+```
+positive_data["Log Transformation"]=np.log(positive_data[numeric_column])
+```
+Reciprocal Transformation
+```
+positive_data["Reciprocal"]=1/positive_data[numeric_column]
+```
+Square Root Transformation
+```
+positive_data["Square Root"]=np.sqrt(positive_data[numeric_column])
+```
+Boxcox method
+```
+positive_data["Box_cox"],lambda_value=boxcox(positive_data[numeric_column])
+```
+Yeojohnson method
+```
+pt=PowerTransformer(method='yeo-johnson')
+df['Yeo-Johnson_Transformation']=pt.fit_transform(df[[numeric_column]])
+```
+# Output:
+<img width="989" height="407" alt="image" src="https://github.com/user-attachments/assets/bb9b0d94-aa05-4cf6-899d-6558d8ed4c8b" />
+
 # RESULT:
-       # INCLUDE YOUR RESULT HERE
+Thus,The Feature Encoding and Transformation performed successfully
 
        
